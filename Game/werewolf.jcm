@@ -1,0 +1,175 @@
+mas vesna {
+    agent narrator : narrator.asl {
+        goals  : setup
+        beliefs: setting(debug_log(true)),
+                 setting(phase_transition_delay_ms(0)), 
+                 setting(writing_delay_ms(0)),
+                 setting(responsive_delay_range_ms(500,1000)),
+
+                 //setting(llm_disabled(true)),
+                 setting(ui_show_vote_recap(false)),
+                 setting(ui_show_hunt_recap(false)),
+                 setting(ui_show_intent_to_speak_recap(false)),
+
+                 setting(avoid_ties_in_votes(true)),
+                 setting(debug_log(true)),
+                 //setting(llm_model("gemma4:e4b"))
+    }
+
+    // ==========================================
+    // --- THE WOLF PACK (12 Players) ---
+    // ==========================================
+
+    // 1. The Mastermind Wolf (Calm and controlling)
+    agent alice : init_player.asl {
+        instances : 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-0.8), individualism(0.9), stress(0)[mood], exposure(0)[mood] )
+        strategy: most_similar
+        beliefs: iam(wolf), reasoner(llm), setting(spectator_mode(true))
+    }
+
+    // 2. The Sheep Wolf (Blends in, follows others)
+    agent bob : init_player.asl {
+        instances : 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.4), individualism(-0.7), stress(0)[mood], exposure(-1)[mood] )
+        strategy: most_similar
+        beliefs: iam(wolf), reasoner(llm)
+    }
+
+    // 3. The Hysteric Wolf (A liability, overly defensive)
+    agent charlie : init_player.asl {
+        instances : 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.9), individualism(-0.8), stress(1)[mood], exposure(-0.5)[mood] )
+        strategy: most_similar
+        beliefs: iam(wolf), reasoner(llm)
+    }
+
+    // ==========================================
+    // --- THE VILLAGE (9 Players) ---
+    // ==========================================
+// 1. The Gullible Sheep (Lowest Paranoia, Lowest Individualism)
+    // Grid: P(-1.0), I(-1.0)
+    agent arthur : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-1.0), individualism(-1.0), stress(-0.5)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)//, setting(spectator_mode(true))
+    }
+
+    // 2. The Friendly Neighbor (Lowest Paranoia, Neutral Individualism)
+    // Grid: P(-1.0), I(0.0)
+    agent bella : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-1.0), individualism(0.0), stress(0.0)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 3. The Doomsayer (Highest Paranoia, Neutral Individualism)
+    // Grid: P(1.0), I(0.0)
+    agent caleb : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(1.0), individualism(0.0), stress(0.6)[mood], exposure(0.5)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 4. The Maverick Optimist (Lowest Paranoia, Highest Individualism)
+    // Grid: P(-1.0), I(1.0)
+    agent david : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-1.0), individualism(1.0), stress(0.0)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 5. The Logical Leader (Low Paranoia, High Individualism)
+    // Grid: P(-0.5), I(0.5)
+    agent eve : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-0.5), individualism(0.5), stress(-0.2)[mood], exposure(0.4)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 6. The Paranoid Loner (Highest Paranoia, Highest Individualism)
+    // Grid: P(1.0), I(1.0)
+    agent frank : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(1.0), individualism(1.0), stress(0.8)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 7. The Hysteric Accuser (Highest Paranoia, Lowest Individualism)
+    // Grid: P(1.0), I(-1.0)
+    agent grace : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(1.0), individualism(-1.0), stress(0.9)[mood], exposure(0.7)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 8. The Survivor (High Paranoia, High Individualism)
+    // Grid: P(0.5), I(0.5)
+    agent heidi : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.5), individualism(0.5), stress(0.0)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 9. The Cautious Follower (High Paranoia, Low Individualism)
+    // Grid: P(0.5), I(-0.5)
+    agent ivan : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.5), individualism(-0.5), stress(0.3)[mood], exposure(-0.5)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 10. The Trusting Follower (Low Paranoia, Low Individualism)
+    // Grid: P(-0.5), I(-0.5)
+    agent judy : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(-0.5), individualism(-0.5), stress(-0.8)[mood], exposure(-0.2)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 11. The Skeptic (Neutral Paranoia, High Individualism)
+    // Grid: P(0.0), I(0.5)
+    agent kevin : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.0), individualism(0.5), stress(0.0)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    // 12. The True Neutral (Perfectly balanced baseline)
+    // Grid: P(0.0), I(0.0)
+    agent leo : init_player.asl {
+        instances: 1
+        ag-class: vesna.ProAgent
+        temper: temper( paranoia(0.0), individualism(0.0), stress(0.0)[mood], exposure(0.0)[mood] )
+        strategy: most_similar
+        beliefs: iam(villager), reasoner(llm)
+    }
+
+    asl-path: "agents", "agents/narrator", "agents/players"
+
+}

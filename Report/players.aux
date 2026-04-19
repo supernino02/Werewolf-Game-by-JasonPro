@@ -1,0 +1,74 @@
+\relax 
+\providecommand{\transparent@use}[1]{}
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {4}The Player(s)}{19}{section.4}\protected@file@percent }
+\newlabel{sec:players}{{4}{19}{The Player(s)}{section.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Conceptual architecture of the Player Agent, illustrating the decoupling of the fixed network interfaces from the swappable Reasoner logic.}}{19}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:agent_interface}{{6}{19}{Conceptual architecture of the Player Agent, illustrating the decoupling of the fixed network interfaces from the swappable Reasoner logic}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Decision Execution Interface}{19}{section*.11}\protected@file@percent }
+\newlabel{lst:sync_reply_example}{{7}{20}{An example of a submission helper enforcing synchronization by exclusively replying to the Narrator}{lstlisting.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}{\ignorespaces An example of a submission helper enforcing synchronization by exclusively replying to the Narrator.}}{20}{lstlisting.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{State Management Interface}{20}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Setup and Initialization}{20}{subsection.4.1}\protected@file@percent }
+\newlabel{subsec:player-setup}{{4.1}{20}{Setup and Initialization}{subsection.4.1}{}}
+\citation{vesna_pro_toolkit}
+\@writefile{toc}{\contentsline {paragraph}{Easy configuration}{21}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Personality and Moods (Jason-Pro)}{21}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Architectural changes}{21}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Personality definition}{22}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Epistemic Beliefs as Long-Term World Model}{23}{subsection.4.3}\protected@file@percent }
+\newlabel{subsec:first_order_beliefs}{{4.3}{23}{Epistemic Beliefs as Long-Term World Model}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{The \emph  {Traits} Matrix}{23}{section*.16}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Player Trait Matrix: the lazy initialization ensures that empty cells contain a value when they will be used.}}{23}{table.caption.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implemented Traits}{23}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Lazy Initialization and Consistency}{24}{subsubsection.4.3.1}\protected@file@percent }
+\newlabel{lst:trait_management}{{8}{24}{Implementation of trait management defined in \texttt {players/first\_order\_beliefs/traits.asl}. The code features lazy initialization of undefined traits using Gaussian noise to introduce stochasticity, alongside an atomic update plan that seamlessly queries (initializing if necessary) and modifies the belief by a given delta}{lstlisting.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}{\ignorespaces Implementation of trait management defined in \texttt  {players/first\_order\_beliefs/traits.asl}. The code features lazy initialization of undefined traits using Gaussian noise to introduce stochasticity, alongside an atomic update plan that seamlessly queries (initializing if necessary) and modifies the belief by a given delta.}}{24}{lstlisting.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Symbolic Reasoner (Jason-Pro)}{25}{subsection.4.4}\protected@file@percent }
+\newlabel{subsec:symbolic-reasoner}{{4.4}{25}{Symbolic Reasoner (Jason-Pro)}{subsection.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Conceptual architecture of the Symbolic Reasoner: at an abstract level, it acts as an interface to query and update the agent's internal world model, which comprises both its \emph  {self-awareness} and \emph  {first-order epistemic beliefs} about others.}}{26}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:symbolic_reasoner}{{7}{26}{Conceptual architecture of the Symbolic Reasoner: at an abstract level, it acts as an interface to query and update the agent's internal world model, which comprises both its \emph {self-awareness} and \emph {first-order epistemic beliefs} about others}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {paragraph}{Log retrieval (and Caching)}{26}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Role-Specific Strategies}{26}{section*.21}\protected@file@percent }
+\citation{vesna_pro_toolkit}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Updating the Internal State}{27}{subsubsection.4.4.1}\protected@file@percent }
+\newlabel{lst:opinion_pool_example}{{9}{27}{Example of the Villager's plan pool used to react to a player's intent to speak. The java engine selects the most suitable reaction based on the agent's temper}{lstlisting.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}{\ignorespaces Example of the Villager's plan pool used to react to a player's intent to speak. The java engine selects the most suitable reaction based on the agent's temper.}}{27}{lstlisting.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Execution pipeline for state updates: external events trigger \texttt  {upd\_opinion}, prompting the Jason-Pro engine to evaluate the candidate pool, select a specific plan, and subsequently update both its self-awareness and first-order epistemic beliefs.}}{28}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:symbolic_reasoner_write}{{8}{28}{Execution pipeline for state updates: external events trigger \texttt {upd\_opinion}, prompting the Jason-Pro engine to evaluate the candidate pool, select a specific plan, and subsequently update both its self-awareness and first-order epistemic beliefs}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Querying the Internal State}{28}{subsubsection.4.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Execution pipeline for state querying: the interface delegates decision-making to the reasoner, which selects a plan based on temper and queries the belief matrix to do its choice. Before the selection of the most suitable plan, a random ``artifical delay`` is implemented to ensure that belief base is fully up-to-date.}}{28}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:symbolic_reasoner_read}{{9}{28}{Execution pipeline for state querying: the interface delegates decision-making to the reasoner, which selects a plan based on temper and queries the belief matrix to do its choice. Before the selection of the most suitable plan, a random ``artifical delay`` is implemented to ensure that belief base is fully up-to-date}{figure.caption.23}{}}
+\newlabel{lst:query_utils}{{10}{29}{Implementation of the querying utilities. The wrapper enforces lazy initialization before safely aggregating and extracting the optimal candidate}{lstlisting.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}{\ignorespaces Implementation of the querying utilities. The wrapper enforces lazy initialization before safely aggregating and extracting the optimal candidate.}}{29}{lstlisting.10}\protected@file@percent }
+\@setckpt{players}{
+\setcounter{page}{30}
+\setcounter{equation}{0}
+\setcounter{enumi}{4}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{15}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{section}{4}
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{2}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{9}
+\setcounter{table}{1}
+\setcounter{section@level}{3}
+\setcounter{Item}{14}
+\setcounter{Hfootnote}{15}
+\setcounter{bookmark@seq@number}{27}
+\setcounter{svg@param@lastpage}{0}
+\setcounter{svg@param@currpage}{-1}
+\setcounter{float@type}{8}
+\setcounter{lstnumber}{19}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{lstlisting}{10}
+}

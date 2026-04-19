@@ -1,0 +1,59 @@
+\relax 
+\providecommand{\transparent@use}[1]{}
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Speech-Act Misalignment}{53}{section.7}\protected@file@percent }
+\newlabel{sec:speech_act_misalignment}{{7}{53}{Speech-Act Misalignment}{section.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The Natural Language Generation pipeline: the agent first defines the performative and target prior to LLM generation, then it embeds the generated text along with the Speech Act labels.}}{53}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:standard_speech_creation}{{16}{53}{The Natural Language Generation pipeline: the agent first defines the performative and target prior to LLM generation, then it embeds the generated text along with the Speech Act labels}{figure.caption.44}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Closed World Assumption}{53}{subsection.7.1}\protected@file@percent }
+\citation{devlin-etal-2019-bert}
+\citation{wolf-etal-2020-transformers}
+\@writefile{toc}{\contentsline {paragraph}{Dataset Partitioning and Generation}{54}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Baseline 1: Anchor-Based Similarity Classification}{54}{subsection.7.2}\protected@file@percent }
+\newlabel{fig:tsne_clustering}{{\caption@xref {fig:tsne_clustering}{ on input line 61}}{55}{Baseline 1: Anchor-Based Similarity Classification}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Latent space analysis of raw \texttt  {bert-base-uncased} embeddings.}}{55}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:clustering_anchors}{{17}{55}{Latent space analysis of raw \texttt {bert-base-uncased} embeddings}{figure.caption.46}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Baseline 2: Non-Linear Classification via Gaussian Kernel}{55}{subsection.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Confusion matrices demonstrating improved classification performance for performatives and targets using a Gaussian RBF kernel on frozen BERT embeddings.}}{56}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:bert_kernel}{{18}{56}{Confusion matrices demonstrating improved classification performance for performatives and targets using a Gaussian RBF kernel on frozen BERT embeddings}{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Custom Architecture: Joint Fine-Tuning}{56}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Training and validation loss curves. The right panel illustrates the distinct validation losses for the performative and target classification heads.}}{57}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:finetuning_loss}{{19}{57}{Training and validation loss curves. The right panel illustrates the distinct validation losses for the performative and target classification heads}{figure.caption.48}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces t-SNE projections of the hidden layers from both classification heads (evaluated on the validation set), demonstrating perfect structural clustering.}}{57}{figure.caption.49}\protected@file@percent }
+\newlabel{fig:finetuning_tsne}{{20}{57}{t-SNE projections of the hidden layers from both classification heads (evaluated on the validation set), demonstrating perfect structural clustering}{figure.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces t-SNE projections of the hidden layers evaluated on the cross-model test set (\texttt  {Qwen3.5:35b}). The disintegration of the previously distinct clusters visually explains the degradation in classification performance due to domain shift.}}{58}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:finetuning_domain_adaptation_tsne}{{21}{58}{t-SNE projections of the hidden layers evaluated on the cross-model test set (\texttt {Qwen3.5:35b}). The disintegration of the previously distinct clusters visually explains the degradation in classification performance due to domain shift}{figure.caption.50}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Results Summary}{58}{subsection.7.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Summary of classification accuracies across methodologies and datasets.}}{59}{table.caption.51}\protected@file@percent }
+\newlabel{tab:results_summary}{{2}{59}{Summary of classification accuracies across methodologies and datasets}{table.caption.51}{}}
+\@setckpt{NLP}{
+\setcounter{page}{60}
+\setcounter{equation}{0}
+\setcounter{enumi}{3}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{23}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{section}{7}
+\setcounter{subsection}{5}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{21}
+\setcounter{table}{2}
+\setcounter{section@level}{2}
+\setcounter{Item}{17}
+\setcounter{Hfootnote}{23}
+\setcounter{bookmark@seq@number}{44}
+\setcounter{svg@param@lastpage}{0}
+\setcounter{svg@param@currpage}{-1}
+\setcounter{float@type}{8}
+\setcounter{lstnumber}{45}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{lstlisting}{25}
+}

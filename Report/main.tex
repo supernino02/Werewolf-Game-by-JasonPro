@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={5.7in, 9in}]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{svg}
+\usepackage{float}    % Required for the [H] specifier
+\usepackage{listings}
+\usepackage{xcolor} % Required for custom colors
+\usepackage{subcaption}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{multirow}
+
+% Define custom colors for code
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    backgroundcolor=\color{backcolour},   
+    basicstyle=\ttfamily\small, % This makes it look like code (monospaced)
+    keywordstyle=\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegray},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\begin{document}
+\title{No Friends, No Problem: Can AI Play Werewolf?}
+\author{Ninivaggi Luca s5312342\\
+{\em ninivaggiluca@gmail.com}}
+\date{}
+\maketitle        
+
+\section{Details of the Proposal}
+\label{sec:yourProposal}
+
+The proposed project is a Jason-based implementation of the social deduction game ``Werewolf''\footnote{The implemented game follows a slightly modified version (thoroughly explained in subsection ~\ref{subsec:modifiedRules}) of the traditional rules, that can be found at \cite{mafia_wiki}.}.
+
+The project is developed using the MAS infrastructure provided by \emph{Jason}, utilizing a headless adaptation of the \emph{VEsNA-Pro} engine renamed \emph{Jason-Pro}. The game relies entirely on explicit message exchange and internal  logical states, hence the physical environment managed (by design) with\emph{VEsNA} was removed altogether. 
+
+The actual reasoning cycle driving each player's decisions is exclusively handled by a Large Language Model (LLM), a purely symbolic engine, or a real human interacting via a User Interface (UI). 
+
+Within this architecture, all game logic, behavior definition  and state management are strictly handled by the \textbf{Jason Engine}, with the \textbf{LLM} used as a "Natural Language Generator" and the \textbf{UI} as a visualization tool of the player's state.
+
+Within this context, was also conducted a fine-tuning on a instance of BERT\cite{devlin-etal-2019-bert} to try to implement a non-LLM recognition of the speech-act carried by the players, in order to deal with the \emph{Linguistic  Relativism} inherently present in any not-standardized communication exchange.
+
+\subsection{Full Specification of Your Proposal}
+\label{subsec:specification}
+
+The primary goal of this project is to deliver a fully functional, real-time playable game where autonomous agents behave according to their dynamic internal states. 
+
+In this context, the pursuit of  flawlessly strategic gameplay is not the goal: the core objective is to ensure that the agents interact in an \emph{organic} manner, making unpredictable but coherent decisions that genuinely reflect their fluctuating psychological moods and relational variables. 
+
+To achieve this organic social deduction environment, the system's architecture is practically realized through three modules:
+
+\paragraph{Game Engine (S\&DAI):}
+This module functions as the standalone kernel of the Jason MAS. 
+
+Fundamentally, the system is defined by exactly one Narrator and $K$ players communicating exclusively through native Jason performatives. These messages carry strict logical semantics for the engine but entirely lack human-readable natural language (e.g., message are exchanged as  \texttt{speech(accuse(Alice), "")}). 
+
+The Narrator dictates the flow of the game by strictly following an internal game graph, managing phase transitions, synchronization, and rule enforcement. 
+In contrast, the players act as abstract, reactive objects that require an attached reasoning engine to operate: in this baseline implementation, decision-making is handled by the built-in symbolic reasoner, which is driven by \emph{Jason-Pro} parsing logic. 
+
+
+\paragraph{Role-Play simulated experience (NLP):}
+To transform the dry exchange of logical predicates into an immersive social deduction experience, a custom Java bridge queries a local instance of Ollama. Within this architecture, the Large Language Model can serve two distinct functions:
+\begin{itemize}
+    \item \textbf{As a Natural Language Generator (NLG):} It translates the Narrator's structural phase transitions and the agents' chosen symbolic performatives (e.g., \texttt{accuse(alice)}) into coherent, role-played dialogue. 
+    To maintain logical consistency, this text generation is heavily constrained by prompts derived directly from the agent's current state (such as their specific personality traits and momentary moods, or the epistemic beliefs about other players), ensuring the output never contradicts their symbolic intentions.
+    
+    \item \textbf{As a Sub-Symbolic Reasoner:} By utilizing the Jason agent as a structural wrapper, the LLM automatically manages the agent's dynamic internal state. It uses the current symbolic variables (personality and moods) alongside recent game logs as context to evaluate the social environment. 
+    It can also manage its internal state and beliefs about other players to directly drive the agent's future logical actions and plan selections, seamlessly bridging complex social analysis with BDI execution.
+\end{itemize}
+
+Furthermore, an attempt was made to deal with the \emph{Linguistic  Relativism} inherently present in any not-standardized communication exchange. For academic purposes, is proposed a non-LLM implementation of the recognition of the speech-act carried by the  players. Incremental solution were proposed, each one improving the previous one, each one tackling the problem using a pre-trained BERT in slightly different ways. The results (and limitations) of this approach are thoroughly discussed in the dedicated section.
+
+\paragraph{User Interface (UI):}
+The UI serves a dual purpose. For the AI agents, it acts as a real-time observation tool, visualizing their shifting moods, epistemic beliefs, and target choices through an explicit visualization. 
+For a human player, it provides a structured interface that strictly guides their input. By forcing the human to select valid performatives and targets via GUI buttons while allowing free-text message generation, the system ensures that human actions perfectly align with the MAS network and do not break the underlying Prolog logic.
+
+\subsection{Type of project}
+\label{subsec:kind}
+Joined creative project NLP + S\&DAI
+
+
+\subsection{Difficulty Range}
+\label{subsec:points}
+\textbf{HARD} - max 15.5 Points
+
+\tableofcontents
+
+\include{introduction}
+
+\include{narrator}
+
+\include{players}
+
+\include{UI}
+
+\include{LLM}
+
+\include{NLP}
+
+\include{RESULTS}
+
+\section{Conclusions and Future Work}
+\label{sec:conclusions}
+
+This project successfully demonstrated the viability of a hybrid Multi-Agent System (MAS) architecture for social deduction games. By seamlessly integrating the rigid, rule-based execution of Jason with the dynamic natural language generation and sub-symbolic reasoning of Large Language Models, the simulation achieved organic, highly interactive gameplay. Furthermore, the implementation of the custom fine-tuned BERT architecture effectively bridged the gap between ambiguous human-readable dialogue and strict logical performatives, allowing for a fully automated, closed-loop environment resilient to speech-act misalignment.
+
+Despite these successes, the current architecture presents several structural limitations that pave the way for future developments:
+
+\begin{itemize}
+    \item \textbf{Higher-Order Epistemic Beliefs:} The current trait matrix is strictly limited to first-order beliefs. Implementing second-order beliefs like \textit{what Alice believes Bob thinks of her} would allow for significantly deeper Theory of Mind (ToM) modeling, enabling advanced manipulative strategies and complex deception.
+    \item \textbf{Long-Term Strategic Planning:} By design, the current reasoning cycles are atomic and stateless. While this reduces computational overhead, it results in short-sighted players that can fall into behavioral loops. Future iterations must implement more sophisticated plan pools within the symbolic engine and introduce persistent intention stacks (or LLM "scratchpads"), allowing agents to formulate, track, and execute multi-phase strategies over several rounds.
+    \item \textbf{Affective State Extraction from Text:} Currently, the NLP pipeline only extracts pragmatic intent and targets. A natural expansion would be inferring continuous internal states (such as a player's stress or exposure levels) directly from the raw text of their speeches. Initial experimentations utilizing Good Old-Fashioned AI (GOFAI) approaches, such as TF-IDF and Bag-of-Words, were discarded due to poor performance (yielding a Mean Absolute Error of $\approx 0.3$). Future solutions could better tackle this challenge.
+\end{itemize}
+\bibliographystyle{splncs04}
+\bibliography{bibliography}
+
+\end{document}

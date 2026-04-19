@@ -1,0 +1,76 @@
+\contentsline {section}{\numberline {1}Details of the Proposal}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Full Specification of Your Proposal}{1}{subsection.1.1}%
+\contentsline {paragraph}{Game Engine (S\&DAI):}{2}{section*.1}%
+\contentsline {paragraph}{Role-Play simulated experience (NLP):}{2}{section*.2}%
+\contentsline {paragraph}{User Interface (UI):}{2}{section*.3}%
+\contentsline {subsection}{\numberline {1.2}Type of project}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Difficulty Range}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Introduction}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Modified Set of Rules}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Overview of the Project}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}The Narrator Agent}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Setup and Settings Configuration}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The Game Graph}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Nodes}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Edges}{9}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Executing the Transition}{10}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Synchronization Barrier}{13}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Technical implementation}{13}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Phase Execution Examples}{16}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Vote Counting Mechanism}{16}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Speaker Selection Implementation}{17}{subsubsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.5}Logging System}{18}{subsection.3.5}%
+\contentsline {section}{\numberline {4}The Player(s)}{19}{section.4}%
+\contentsline {paragraph}{Decision Execution Interface}{19}{section*.11}%
+\contentsline {paragraph}{State Management Interface}{20}{section*.12}%
+\contentsline {subsection}{\numberline {4.1}Setup and Initialization}{20}{subsection.4.1}%
+\contentsline {paragraph}{Easy configuration}{21}{section*.13}%
+\contentsline {subsection}{\numberline {4.2}Personality and Moods (Jason-Pro)}{21}{subsection.4.2}%
+\contentsline {paragraph}{Architectural changes}{21}{section*.14}%
+\contentsline {paragraph}{Personality definition}{22}{section*.15}%
+\contentsline {subsection}{\numberline {4.3}Epistemic Beliefs as Long-Term World Model}{23}{subsection.4.3}%
+\contentsline {paragraph}{The \emph {Traits} Matrix}{23}{section*.16}%
+\contentsline {paragraph}{Implemented Traits}{23}{section*.18}%
+\contentsline {subsubsection}{\numberline {4.3.1}Lazy Initialization and Consistency}{24}{subsubsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.4}Symbolic Reasoner (Jason-Pro)}{25}{subsection.4.4}%
+\contentsline {paragraph}{Log retrieval (and Caching)}{26}{section*.20}%
+\contentsline {paragraph}{Role-Specific Strategies}{26}{section*.21}%
+\contentsline {subsubsection}{\numberline {4.4.1}Updating the Internal State}{27}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Querying the Internal State}{28}{subsubsection.4.4.2}%
+\contentsline {section}{\numberline {5}The User Interface (UI)}{30}{section.5}%
+\contentsline {subsection}{\numberline {5.1}``Human'' Reasoner}{30}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Dashboard Layout and Visualizer}{30}{subsection.5.2}%
+\contentsline {section}{\numberline {6}LLM Integration}{32}{section.6}%
+\contentsline {paragraph}{Verifying Connectivity and Model Warm-up}{33}{section*.26}%
+\contentsline {subsection}{\numberline {6.1}Prompting the LLM}{33}{subsection.6.1}%
+\contentsline {paragraph}{Stateless Execution Bottleneck}{34}{section*.28}%
+\contentsline {paragraph}{Bridging Symbolic Logic and Natural Language}{34}{section*.29}%
+\contentsline {subsection}{\numberline {6.2}Enhancing Narration}{35}{subsection.6.2}%
+\contentsline {paragraph}{Empirical Prompt Tuning}{37}{section*.30}%
+\contentsline {subsection}{\numberline {6.3}LLM Reasoner (Ollama)}{38}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Textual Encoding of the Agent State}{38}{subsubsection.6.3.1}%
+\contentsline {paragraph}{\textbf {\texttt {log\_2\_context.asl}}}{38}{section*.31}%
+\contentsline {paragraph}{\textbf {\texttt {performatives\_2\_context.asl}}}{39}{section*.32}%
+\contentsline {paragraph}{\textbf {\texttt {traits\_2\_context.asl}}}{39}{section*.33}%
+\contentsline {paragraph}{\textbf {\texttt {temper\_2\_context.asl}}}{40}{section*.34}%
+\contentsline {paragraph}{\textbf {Speech modeling based on dynamic moods}}{42}{section*.36}%
+\contentsline {subsubsection}{\numberline {6.3.2}Updating the World Model}{43}{subsubsection.6.3.2}%
+\contentsline {paragraph}{\textbf {Atomic LLM Querying and Short-Sighted Planning}}{46}{section*.38}%
+\contentsline {subsubsection}{\numberline {6.3.3}Active Choice Generation}{47}{subsubsection.6.3.3}%
+\contentsline {paragraph}{\textbf {Night Phase Execution (\texttt {choose\_victim})}}{47}{section*.40}%
+\contentsline {paragraph}{\textbf {Daytime Voting (\texttt {choose\_vote})}}{48}{section*.41}%
+\contentsline {paragraph}{\textbf {Dialogue Participation (\texttt {decide\_to\_speak})}}{49}{section*.42}%
+\contentsline {paragraph}{\textbf {Rhetorical Stance Selection (\texttt {get\_valid\_performative})}}{49}{section*.43}%
+\contentsline {subsection}{\numberline {6.4}Enhancing Player's Speech}{50}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Speech-Act Misalignment}{53}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Closed World Assumption}{53}{subsection.7.1}%
+\contentsline {paragraph}{Dataset Partitioning and Generation}{54}{section*.45}%
+\contentsline {subsection}{\numberline {7.2}Baseline 1: Anchor-Based Similarity Classification}{54}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Baseline 2: Non-Linear Classification via Gaussian Kernel}{55}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Custom Architecture: Joint Fine-Tuning}{56}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Results Summary}{58}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Gameplay Results}{60}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Symbolic Agents' Gameplay}{60}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}LLM-Driven Agents' Gameplay}{62}{subsection.8.2}%
+\contentsline {paragraph}{Emergent Biases in LLM Targeting}{64}{section*.58}%
+\contentsline {section}{\numberline {9}Conclusions and Future Work}{65}{section.9}%

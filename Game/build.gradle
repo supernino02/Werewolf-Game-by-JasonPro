@@ -1,0 +1,57 @@
+// 1. Plugins MUST be at the very top
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.1.0' 
+}
+
+// 2. Project properties
+defaultTasks 'run'
+
+repositories {
+    maven { url "https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master" }
+    maven { url "https://repo.gradle.org/gradle/libs-releases" }
+    mavenCentral()
+}
+
+// 3. JavaFX Configuration
+javafx {
+    version = "21" // This pulls the JavaFX 21 binaries. (Ensure you have JDK 17 or 21 installed).
+    modules = [ 'javafx.controls', 'javafx.graphics' ]
+}
+
+// 4. Dependencies Map
+dependencies {
+    implementation('org.jacamo:jacamo:1.2')
+    
+    // AtlantaFX: The modern CSS theme engine for our chat UI
+    implementation 'io.github.mkpaz:atlantafx-base:2.0.1' 
+
+    // Add this line for the OllamaAPI JSON payload construction
+    implementation 'org.json:json:20240303'
+}
+
+// 5. JaCaMo Execution Task
+task run(type: JavaExec, dependsOn: 'classes') {
+    description 'runs the application'
+    group 'JaCaMo'
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'werewolf.jcm'
+    classpath sourceSets.main.runtimeClasspath
+
+    // Forces the JVM to expose JavaFX internals to the JaCaMo engine
+    jvmArgs = [
+        '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+        '--add-opens=javafx.controls/javafx.scene.control=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED'
+    ]
+}
+
+// 6. Source Directory Mapping
+sourceSets {
+    main {
+        java {
+            srcDir 'src/' 
+        }
+    }
+}

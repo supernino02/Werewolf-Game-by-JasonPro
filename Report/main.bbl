@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{devlin-etal-2019-bert}
+Devlin, J., Chang, M., Lee, K., Toutanova, K.: {BERT:} pre-training of deep
+  bidirectional transformers for language understanding. CoRR
+  \textbf{abs/1810.04805} (2018), \url{http://arxiv.org/abs/1810.04805}
+
+\bibitem{vesna_pro_toolkit}
+{VEsNA-ToolKit}: vesna-pro. \url{https://github.com/VEsNA-ToolKit/vesna-pro}
+  (2026)
+
+\bibitem{mafia_wiki}
+{Wikipedia contributors}: Mafia (party game) --- {Wikipedia}{,} the free
+  encyclopedia. \url{https://en.wikipedia.org/wiki/Mafia_(party_game)} (2024)
+
+\bibitem{wolf-etal-2020-transformers}
+Wolf, T., et~al.: Transformers: State-of-the-art natural language processing.
+  In: Proceedings of the 2020 Conference on Empirical Methods in Natural
+  Language Processing: System Demonstrations. pp. 38--45. Association for
+  Computational Linguistics (2020),
+  \url{https://www.aclweb.org/anthology/2020.emnlp-demos.6}
+
+\end{thebibliography}

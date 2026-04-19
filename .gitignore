@@ -1,0 +1,12 @@
+**/.gradle/
+**/build/
+**/bin/
+**/.settings/
+**/.classpath
+**/.DS_Store
+**/.idea
+*.json
+*.pth
+**/RAW_GAMES/
+**/GAME_STATS/LLM/
+**/GAME_STATS/SYMBOLIC/
