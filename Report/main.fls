@@ -1,6 +1,6 @@
-PWD c:\Users\niniv\Downloads\Werewolf\Report
+PWD c:\Users\niniv\Downloads\Werewolf---JasonPro\Report
 INPUT C:\Users\niniv\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\niniv\Downloads\Werewolf\Report\main.tex
+INPUT c:\Users\niniv\Downloads\Werewolf---JasonPro\Report\main.tex
 OUTPUT main.log
 INPUT C:\Users\niniv\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\niniv\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
