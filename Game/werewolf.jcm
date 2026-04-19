@@ -3,8 +3,8 @@ mas vesna {
         goals  : setup
         beliefs: setting(debug_log(true)),
                  setting(phase_transition_delay_ms(0)), 
-                 setting(writing_delay_ms(0)),
-                 setting(responsive_delay_range_ms(500,1000)),
+                 //setting(writing_delay_ms(0)),
+                 //setting(responsive_delay_range_ms(500,1000)),
 
                  //setting(llm_disabled(true)),
                  setting(ui_show_vote_recap(false)),
