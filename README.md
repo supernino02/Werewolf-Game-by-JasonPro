@@ -32,7 +32,7 @@ To avoid duplicating concepts, this README stays high-level and points to the de
 1. The game runtime in [Game](Game) generates interaction logs from symbolic/LLM/human-driven play.
 2. Those logs can be transformed into datasets with [NLP Analysis/datasets/create_speech_dataset.py](NLP%20Analysis/datasets/create_speech_dataset.py).
 3. BERT models are trained/evaluated in [NLP Analysis/v3_bert_tuning](NLP%20Analysis/v3_bert_tuning).
-4. Runtime speech-act inference is served by [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py), which expects a trained `model.pth` in `Game/BERT_API`.
+4. Runtime speech-act inference is served by [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py), which loads automatically a trained `model.pth` in `Game/BERT_API` from huggingface.
 5. Simulation batches are analyzed via [Simulations/images.py](Simulations/images.py), and final documentation is maintained in [Report](Report).
 
 ## Quick Start (Run The Game)

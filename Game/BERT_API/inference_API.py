@@ -6,12 +6,18 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
 import warnings
+from huggingface_hub import hf_hub_download
+
 warnings.filterwarnings("ignore")
 
-
 # 1. Configuration and Mappings
-MODEL_PATH = "model.pth"
+REPO_ID = "supernino02/WerewolfBert"
+FILENAME = "custom_model.pth"
+LOCAL_DIR = "./model_storage"  # Folder where the model will be persisted
 MAX_LEN = 128
+
+# If your repo is Private, you can set an environment variable before running the script:
+HF_TOKEN = os.environ.get("HF_TOKEN") 
 
 PERFORMATIVES = ['accuse', 'defend', 'suspect', 'agree', 'interrogate', 'deflect']
 ID_TO_PERF = {i: perf for i, perf in enumerate(PERFORMATIVES)}
@@ -52,7 +58,6 @@ class SimpleJointBERT(nn.Module):
 # 3. Setup FastAPI and Global State
 app = FastAPI(title="Game NLP Inference Engine")
 
-# Global variables to hold model and tokenizer in memory
 device = None
 model = None
 tokenizer = None
@@ -63,13 +68,34 @@ def load_model():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Loading model onto {device}...")
     
-    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+    # Ensure local directory exists
+    os.makedirs(LOCAL_DIR, exist_ok=True)
+    local_path = os.path.join(LOCAL_DIR, FILENAME)
+    
+    # 1. Download only if it doesn't exist locally
+    if not os.path.exists(local_path):
+        print(f"Model not found locally. Downloading from {REPO_ID}...")
+        try:
+            hf_hub_download(
+                repo_id=REPO_ID, 
+                filename=FILENAME, 
+                token=HF_TOKEN,
+                local_dir=LOCAL_DIR,
+                local_dir_use_symlinks=False
+            )
+            print("Download complete.")
+        except Exception as e:
+            raise RuntimeError(f"Failed to download weights: {e}")
+    else:
+        print("Model found locally. Loading immediately...")
+
+    print(f"Downloading/Loading tokenizer from {REPO_ID}...")
+    tokenizer = BertTokenizerFast.from_pretrained(REPO_ID, token=HF_TOKEN)
+    
     model = SimpleJointBERT(len(PERFORMATIVES), len(PLAYERS)).to(device)
     
-    if not os.path.exists(MODEL_PATH):
-        raise RuntimeError(f"Weights not found at {MODEL_PATH}")
-        
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+    print(f"Applying weights from {local_path}...")
+    model.load_state_dict(torch.load(local_path, map_location=device, weights_only=True))
     model.eval()
     print("Model successfully loaded and ready for inference.")
 
@@ -84,7 +110,6 @@ def predict(query: Query):
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
     try:
-        # Tokenize
         encoding = tokenizer(
             query.message, 
             max_length=MAX_LEN, 
@@ -96,21 +121,15 @@ def predict(query: Query):
         input_ids = encoding['input_ids'].to(device)
         attention_mask = encoding['attention_mask'].to(device)
 
-        # Forward Pass
         with torch.no_grad():
             p_logits, t_logits = model(input_ids, attention_mask)
 
-        # Argmax to get classes
         p_idx = torch.argmax(p_logits, dim=1).item()
         t_idx = torch.argmax(t_logits, dim=1).item()
 
-        # Map back to strings
-        predicted_perf = ID_TO_PERF[p_idx]
-        predicted_target = ID_TO_TARGET[t_idx]
-
         return {
-            "performative": predicted_perf,
-            "target": predicted_target,
+            "performative": ID_TO_PERF[p_idx],
+            "target": ID_TO_TARGET[t_idx],
             "message": query.message
         }
 
@@ -118,5 +137,4 @@ def predict(query: Query):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    # Run the server on localhost:81818
     uvicorn.run(app, host="127.0.0.1", port=41818)

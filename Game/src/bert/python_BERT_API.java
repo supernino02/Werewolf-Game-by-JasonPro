@@ -90,46 +90,51 @@ public class python_BERT_API {
         }
     }
 
-    // Helper method to spawn the Python process and poll until it's ready
+    private static final int MAX_RETRIES = 60;      // 60 attempts
+    private static final int RETRY_DELAY_MS = 3000; // 3 seconds per attempt
+    // Total wait time = 180 seconds (3 minutes)
+
     private static boolean startPythonServer() {
         try {
             ProcessBuilder pb = new ProcessBuilder("python", "inference_API.py");
-            
-            // Ensure this folder exists relative to where you launch Jason!
             pb.directory(new File("BERT_API")); 
+            pb.redirectErrorStream(true);
             
-            pb.redirectErrorStream(true); // Merge stderr into stdout
             Process p = pb.start();
             
-            // --- NEW DEBUGGING CODE: Read and print the Python console output ---
             java.io.BufferedReader reader = new java.io.BufferedReader(
                     new java.io.InputStreamReader(p.getInputStream()));
             new Thread(() -> {
                 String line;
                 try {
                     while ((line = reader.readLine()) != null) {
-                        // Print exactly what Python is doing/crashing with
                         System.out.println("[PYTHON CONSOLE] " + line); 
                     }
-                } catch (IOException e) {
-                    // Ignore stream closed errors when process dies
-                }
+                } catch (IOException e) {}
             }).start();
-            // --------------------------------------------------------------------
 
-            // Polling loop: Wait for PyTorch to load the model into VRAM
-            jasonLogger.info("Python process launched. Waiting for PyTorch weights to load into GPU (Timeout: 30s)...");
+            jasonLogger.info("Python process launched. Waiting for PyTorch weights to load (Timeout: " 
+                             + (MAX_RETRIES * RETRY_DELAY_MS / 1000) + "s)...");
             
-            for (int i = 0; i < 15; i++) {
-                Thread.sleep(2000); // Wait 2 seconds between pings
+            for (int i = 0; i < MAX_RETRIES; i++) {
+                // 1. Check if the Python process actually crashed
+                if (!p.isAlive()) {
+                    jasonLogger.severe("Python process died unexpectedly while starting. Check [PYTHON CONSOLE] logs.");
+                    return false;
+                }
+
+                // 2. Check if API is responding
                 if (attemptPing()) {
-                    jasonLogger.info("Python BERT server started successfully and is ready for inference.");
+                    jasonLogger.info("Python BERT server started successfully!");
                     return true;
                 }
+
+                // 3. Wait before next retry
+                Thread.sleep(RETRY_DELAY_MS);
             }
             
-            jasonLogger.severe("Python server failed to respond within 30 seconds. Check [PYTHON CONSOLE] outputs above for the crash reason.");
-            p.destroy(); // Kill the hung process
+            jasonLogger.severe("Python server failed to respond within the allotted time. Killing process.");
+            p.destroy(); 
             return false;
             
         } catch (Exception e) {
@@ -137,7 +142,7 @@ public class python_BERT_API {
             return false;
         }
     }
-
+    
     // Queries the API, parses the JSON, and returns the Jason literal string
     public static String predict(String agentName, String message) {
         try {

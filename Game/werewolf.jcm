@@ -13,7 +13,7 @@ mas vesna {
 
                  setting(avoid_ties_in_votes(true)),
                  setting(debug_log(true)),
-                 //setting(llm_model("gemma4:e4b"))
+                 setting(llm_model("gemma4:e4b"))
     }
 
     // ==========================================

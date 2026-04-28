@@ -32,7 +32,7 @@ If Ollama is not reachable, narrator startup marks `llm_disabled(true)` and the 
 Suggested install example:
 
 ```bash
-pip install torch transformers fastapi pydantic uvicorn
+pip install torch transformers fastapi pydantic uvicorn "huggingface_hub[hf_xet]"
 ```
 
 ## 2) How to Start a Game
