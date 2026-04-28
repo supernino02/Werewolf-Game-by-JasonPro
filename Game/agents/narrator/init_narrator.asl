@@ -11,7 +11,7 @@ default_settings([
     max_log_entries_retrieved(100)[local],       //maximum chunk of log entries to retrieve for the LLM context )upper limit for performance reasons)
 
     trait_bounds(-1.0, 1.0, 2)[share],           //trait bounds definition
-    trait_init_noise(0.05)[share],               //random noise added at the initialization of traits.
+    trait_init_noise(0.15)[share],               //random noise added at the initialization of traits.
 
     responsive_delay_range_ms(500, 3000)[share], //delay to simulate "thinking"
     writing_delay_ms(30)[share],                 //delay to simulate the typing of the messages
