@@ -8,7 +8,7 @@ Werewolf is a multi-agent social deduction project built on Jason/JaCaMo, with s
 - NLP-based speech-act reconstruction using a BERT service.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/supernino02/Werewolf-Game-by-JasonPro/main/Report/images/UI.PNG" alt="Werewolf UI" width="600">
+  <img src="https://raw.githubusercontent.com/supernino02/Werewolf-Game-by-JasonPro/main/Report/images/UI.PNG" alt="Werewolf UI" width="100%">
   <br>
   <em>The JavaFX interface facilitating human-agent interaction during gameplay.</em>
 </p>
