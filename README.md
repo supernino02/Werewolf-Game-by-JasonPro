@@ -15,32 +15,6 @@ Werewolf is a multi-agent social deduction project built on Jason/JaCaMo, with s
 
 This repository also includes the full NLP experimentation pipeline, simulation archives, and the LaTeX report used to document results.
 
-## Start Here
-
-To avoid duplicating concepts, this README stays high-level and points to the detailed Game documentation:
-
-- Setup, startup, `.jcm` settings, and runtime behavior:
-	[Game/SETUP_AND_JCM_SETTINGS_GUIDE.md](Game/SETUP_AND_JCM_SETTINGS_GUIDE.md)
-- Full architecture and file-by-file map of the game runtime:
-	[Game/CODEBASE_MAP.md](Game/CODEBASE_MAP.md)
-
-## Repository Overview
-
-| Area | Purpose | Main Entry Points |
-|---|---|---|
-| [Game](Game) | Runtime multi-agent Werewolf system (Jason/JaCaMo + Java + UI + LLM + BERT bridge). | [Game/build.gradle](Game/build.gradle), [Game/werewolf.jcm](Game/werewolf.jcm), [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py) |
-| [NLP Analysis](NLP%20Analysis) | Dataset creation, baseline analyses, and BERT tuning for performative/target prediction. | [NLP Analysis/datasets/create_speech_dataset.py](NLP%20Analysis/datasets/create_speech_dataset.py), [NLP Analysis/v3_bert_tuning/train.py](NLP%20Analysis/v3_bert_tuning/train.py), [NLP Analysis/v3_bert_tuning/test.py](NLP%20Analysis/v3_bert_tuning/test.py) |
-| [Simulations](Simulations) | Archived game runs and post-processing scripts for plots/statistics. | [Simulations/images.py](Simulations/images.py), [Simulations/LLM](Simulations/LLM), [Simulations/SYMBOLIC](Simulations/SYMBOLIC) |
-| [Report](Report) | Full technical write-up and figures (LaTeX project). | [Report/main.tex](Report/main.tex), [Report/NLP.tex](Report/NLP.tex), [Report/LLM.tex](Report/LLM.tex), [Report/RESULTS.tex](Report/RESULTS.tex) |
-
-## How The Pieces Fit Together
-
-1. The game runtime in [Game](Game) generates interaction logs from symbolic/LLM/human-driven play.
-2. Those logs can be transformed into datasets with [NLP Analysis/datasets/create_speech_dataset.py](NLP%20Analysis/datasets/create_speech_dataset.py).
-3. BERT models are trained/evaluated in [NLP Analysis/v3_bert_tuning](NLP%20Analysis/v3_bert_tuning).
-4. Runtime speech-act inference is served by [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py), which loads automatically a trained `model.pth` in `Game/BERT_API` from huggingface.
-5. Simulation batches are analyzed via [Simulations/images.py](Simulations/images.py), and final documentation is maintained in [Report](Report).
-
 ## Quick Start (Run The Game)
 
 Detailed requirements are in [Game/SETUP_AND_JCM_SETTINGS_GUIDE.md](Game/SETUP_AND_JCM_SETTINGS_GUIDE.md). Minimal checklist:
@@ -118,7 +92,28 @@ latexmk -pdf main.tex
 - [Game/src](Game/src): Java internal actions (LLM, BERT, UI, utilities).
 - [NLP Analysis](NLP%20Analysis): data and model experimentation.
 
-## Notes
+## Start Here
 
-- Generated artifacts such as build output, raw game exports, and some model/log files are ignored by [.gitignore](.gitignore).
-- For complete setting semantics and architecture internals, use the two linked Game docs as the canonical reference.
+To avoid duplicating concepts, this README stays high-level and points to the detailed Game documentation:
+
+- Setup, startup, `.jcm` settings, and runtime behavior:
+	[Game/SETUP_AND_JCM_SETTINGS_GUIDE.md](Game/SETUP_AND_JCM_SETTINGS_GUIDE.md)
+- Full architecture and file-by-file map of the game runtime:
+	[Game/CODEBASE_MAP.md](Game/CODEBASE_MAP.md)
+
+## Repository Overview
+
+| Area | Purpose | Main Entry Points |
+|---|---|---|
+| [Game](Game) | Runtime multi-agent Werewolf system (Jason/JaCaMo + Java + UI + LLM + BERT bridge). | [Game/build.gradle](Game/build.gradle), [Game/werewolf.jcm](Game/werewolf.jcm), [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py) |
+| [NLP Analysis](NLP%20Analysis) | Dataset creation, baseline analyses, and BERT tuning for performative/target prediction. | [NLP Analysis/datasets/create_speech_dataset.py](NLP%20Analysis/datasets/create_speech_dataset.py), [NLP Analysis/v3_bert_tuning/train.py](NLP%20Analysis/v3_bert_tuning/train.py), [NLP Analysis/v3_bert_tuning/test.py](NLP%20Analysis/v3_bert_tuning/test.py) |
+| [Simulations](Simulations) | Archived game runs and post-processing scripts for plots/statistics. | [Simulations/images.py](Simulations/images.py), [Simulations/LLM](Simulations/LLM), [Simulations/SYMBOLIC](Simulations/SYMBOLIC) |
+| [Report](Report) | Full technical write-up and figures (LaTeX project). | [Report/main.tex](Report/main.tex), [Report/NLP.tex](Report/NLP.tex), [Report/LLM.tex](Report/LLM.tex), [Report/RESULTS.tex](Report/RESULTS.tex) |
+
+## How The Pieces Fit Together
+
+1. The game runtime in [Game](Game) generates interaction logs from symbolic/LLM/human-driven play.
+2. Those logs can be transformed into datasets with [NLP Analysis/datasets/create_speech_dataset.py](NLP%20Analysis/datasets/create_speech_dataset.py).
+3. BERT models are trained/evaluated in [NLP Analysis/v3_bert_tuning](NLP%20Analysis/v3_bert_tuning).
+4. Runtime speech-act inference is served by [Game/BERT_API/inference_API.py](Game/BERT_API/inference_API.py), which loads automatically a trained `model.pth` in `Game/BERT_API` from huggingface.
+5. Simulation batches are analyzed via [Simulations/images.py](Simulations/images.py), and final documentation is maintained in [Report](Report).
